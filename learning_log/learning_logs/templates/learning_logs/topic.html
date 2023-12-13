@@ -6,8 +6,6 @@
 
     <p>Anotações:</p>
 
-    <p><a href="{% url 'new_entry' topic_id=topic.id %}">Adicione uma nova anotação</a></p>
-
     <ul>
     {% for entry in entries %}
 
@@ -23,5 +21,6 @@
     {% endfor %}
 
     </ul>
+    <p><a href="{% url 'new_entry' topic_id=topic.id %}">Adicione uma nova anotação</a></p>
     
 {% endblock content %}
