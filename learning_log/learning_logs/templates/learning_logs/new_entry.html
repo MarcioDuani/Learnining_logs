@@ -3,7 +3,7 @@
     {% block content %}
         <p><a href="{% url 'topic' topic_id=topic.id %}">{{ topic }}</a></p>
 
-        <p>Adicionar uma nova Anatação:</p>
+        <p>Adicionar uma nova Anotação:</p>
     <form action="{% url 'new_entry' topic_id=topic.id %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
