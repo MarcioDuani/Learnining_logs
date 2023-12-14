@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# rotas para os aplicativos
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('learning_logs.urls')),
+    path('users/', include('users.urls')),
 ]
   
