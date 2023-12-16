@@ -4,6 +4,7 @@ from .forms import TopicForm, EntryForm
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
 
 
 def index(request):
@@ -79,13 +80,12 @@ def new_entry(request, topic_id):
 
 @login_required
 def edit_entry(request, entry_id):
-    """Edita uma entrada existente"""
     try:
         entry = Entry.objects.get(id=entry_id)
     except Entry.DoesNotExist:
         raise Http404("A entrada não existe.")
 
-    # Verifica se o usuário logado é o proprietário original da entrada
+    # Verifica se o usuário logado é o dono do tópico associado à entrada
     if entry.topic.owner != request.user:
         raise Http404("Você não tem permissão para editar esta entrada.")
 
@@ -98,11 +98,23 @@ def edit_entry(request, entry_id):
         # Dados de Post submetidos, processa os dados
         form = EntryForm(data=request.POST, instance=entry)
         if form.is_valid():
-            # Atribui o usuário logado como o proprietário da entrada
-            edited_entry = form.save(commit=False)
-            edited_entry.owner = request.user
-            edited_entry.save()
+            form.save()
             return HttpResponseRedirect(reverse('topic', args=[topic.id]))
 
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
+
+@login_required
+def delete_entry(request, entry_id):
+    entry = get_object_or_404(Entry, id=entry_id)
+
+    # Verifica se o usuário logado é o dono da entrada
+    if entry.topic.owner != request.user:
+        raise Http404("Você não tem permissão para excluir esta entrada.")
+
+    # Exclui a entrada e redireciona para a página do tópico
+    entry.delete()
+    return HttpResponseRedirect(reverse('topic', args=[entry.topic.id]))
+
+
+

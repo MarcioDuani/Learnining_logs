@@ -8,10 +8,17 @@
 
 <p>Editar Anotação:</p>
 
-<form action="{% url 'new_entry' topic_id=topic.id %}" method="post">
+<form action="{% url 'edit_entry' entry_id=entry.id %}" method="post">
 
     {% csrf_token %}
     {{ form.as_p }}
-    <button name="subimit">Salvar</button>
+    <button name="subimit">Salvar Edição</button>
 </form>
+
+<!-- Adicione um botão para excluir a entrada -->
+<form action="{% url 'delete_entry' entry_id=entry.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta entrada?')">Excluir Anotação</button>
+</form>
+
 {% endblock content %}
