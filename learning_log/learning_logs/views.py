@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
-
 
 
 def index(request):
@@ -15,14 +13,22 @@ def index(request):
 @login_required
 def topics(request):
     """mostra todos os assuntos buscando do banco"""
-    topic = Topic.objects.order_by('date_added')
-    contex = {'topics': topic}
-    return render(request,'learning_logs/topics.html', contex)
+    #topic = Topic.objects.order_by('date_added')//código anterior comentado
+    # incluindo filtro por dono //código atual a baixo:
+    topic = Topic.objects.filter(owner=request.user).order_by('date_added')
+    
+    context = {'topics': topic}
+    return render(request,'learning_logs/topics.html', context)
 
 @login_required
 def topic(request, topic_id):
     """mostra um unico assunto e suas entradas"""
     topic =Topic.objects.get(id = topic_id)
+
+    #Garantir que o assunto pertence ao usuário atual
+    if topic.owner != request.user:
+        raise Http404
+
     entries = topic.entry_set.order_by('-date_added')
     context ={'topic': topic, 'entries': entries}
     return render(request,'learning_logs/topic.html', context)
@@ -37,7 +43,9 @@ def new_topic(request):
         # Dados de POST submetidos; processar os dados
         form = TopicForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_topic = form.save(commit=False)
+            new_topic.owner = request.user
+            new_topic.save()
             return HttpResponseRedirect(reverse('topics'))
 
     context = {'form': form}   
@@ -47,6 +55,11 @@ def new_topic(request):
 def new_entry(request, topic_id):
     """Add a new entry for a particular topic"""
     topic = Topic.objects.get(id=topic_id)
+
+    #Garantir que o assunto pertence ao usuário atual
+    if topic.owner != request.user:
+        raise Http404
+
     if request.method != 'POST':
         # No data submitted, create a blank form
         form = EntryForm()
@@ -61,24 +74,35 @@ def new_entry(request, topic_id):
             return HttpResponseRedirect(reverse('topic',args=[topic_id] ))
 
     context = {'topic': topic, 'form': form}
-    return render(request, 'learning_logs/new_entry.html', context)
-    
+    return render(request, 'learning_logs/new_entry.html', context)   
+
+
 @login_required
 def edit_entry(request, entry_id):
     """Edita uma entrada existente"""
-    entry = Entry.objects.get(id=entry_id)
+    try:
+        entry = Entry.objects.get(id=entry_id)
+    except Entry.DoesNotExist:
+        raise Http404("A entrada não existe.")
+
+    # Verifica se o usuário logado é o proprietário original da entrada
+    if entry.topic.owner != request.user:
+        raise Http404("Você não tem permissão para editar esta entrada.")
+
     topic = entry.topic
 
-    if request.method !='POST':
-        # Requesição inicial, preenche previamente a entrada do formulario atual
+    if request.method != 'POST':
+        # Requisição inicial, preenche previamente a entrada do formulário atual
         form = EntryForm(instance=entry)
-
     else:
-        # dados de Post submetidos processa os dados
-        form = EntryForm(instance=entry, data=request.POST)
+        # Dados de Post submetidos, processa os dados
+        form = EntryForm(data=request.POST, instance=entry)
         if form.is_valid():
-            form.save()
+            # Atribui o usuário logado como o proprietário da entrada
+            edited_entry = form.save(commit=False)
+            edited_entry.owner = request.user
+            edited_entry.save()
             return HttpResponseRedirect(reverse('topic', args=[topic.id]))
 
-    context = {'entry': entry, 'topic': topic, 'form': form} 
-    return render(request,'learning_logs/edit_entry.html', context)       
+    context = {'entry': entry, 'topic': topic, 'form': form}
+    return render(request, 'learning_logs/edit_entry.html', context)
