@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% extends "learning_logs/base.html" %}
 
 
@@ -6,12 +7,16 @@
 {% if form.erro %}
     <p>Login e senha inválido tente novamente</p>
 {% endif %}
-
-<form action="{% url 'register' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">Registrar</button>
-    <input type="hidden" name="next" value="{% url 'index' %}"/>
-</form>
-
+<div class="container d-flex justify-content-center mb-3">
+    <div class="row">
+        <form  class="form-control" action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="container d-flex justify-content-center mb-3">
+                <button class="btn btn-secondary" name="submit">Registrar</button>
+                <input type="hidden" name="next" value="{% url 'index' %}"/>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock content %}

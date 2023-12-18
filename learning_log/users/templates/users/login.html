@@ -1,17 +1,30 @@
+<!DOCTYPE html>
 {% extends "learning_logs/base.html" %}
+{% load bootstrap5 %}
 
+{% block header %}
+<div class="h-50 p-4 bg-body-tertiary d-flex justify-content-center ">
+    <h2>Entre com sua conta de Login.</h2>
+</div>
+{% endblock header %}
+
+    
 
 {% block content %}
 
 {% if form.erro %}
-    <p>Login e senha inválido tente novamente</p>
+    <div class="h-50 p-3 bg-body-tertiary d-flex justify-content-center ">
+        <p>Login e senha inválido tente novamente</p>
+    </div>
 {% endif %}
-
-<form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">Entrar</button>
-    <input type="hidden" name="next" value="{% url 'index' %}"/>
-</form>
-
-{% endblock content %}
+<div class="container">
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button class="btn btn-primary" name="submit">Entrar</button>
+        {% endbuttons %}
+        <input type="hidden" name="next" value="{% url 'index' %}"/>
+    </form>
+</div>
+    {% endblock content %}

@@ -13,13 +13,15 @@ def index(request):
 
 @login_required
 def topics(request):
-    """mostra todos os assuntos buscando do banco"""
-    #topic = Topic.objects.order_by('date_added')//código anterior comentado
-    # incluindo filtro por dono //código atual a baixo:
-    topic = Topic.objects.filter(owner=request.user).order_by('date_added')
-    
-    context = {'topics': topic}
-    return render(request,'learning_logs/topics.html', context)
+    """Mostra todos os assuntos buscando do banco"""
+    # Incluindo filtro por dono
+    user_topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+
+    # Contar o número de assuntos
+    topic_count = user_topics.count()
+
+    context = {'topics': user_topics, 'topic_count': topic_count}
+    return render(request, 'learning_logs/topics.html', context)
 
 @login_required
 def topic(request, topic_id):
@@ -33,6 +35,7 @@ def topic(request, topic_id):
     entries = topic.entry_set.order_by('-date_added')
     context ={'topic': topic, 'entries': entries}
     return render(request,'learning_logs/topic.html', context)
+    
 
 @login_required
 def new_topic(request):
@@ -115,6 +118,7 @@ def delete_entry(request, entry_id):
     # Exclui a entrada e redireciona para a página do tópico
     entry.delete()
     return HttpResponseRedirect(reverse('topic', args=[entry.topic.id]))
+
 
 
 
