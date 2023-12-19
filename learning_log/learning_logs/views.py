@@ -1,10 +1,11 @@
-from django.shortcuts import render
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+
+
 
 
 def index(request):
@@ -118,6 +119,26 @@ def delete_entry(request, entry_id):
     # Exclui a entrada e redireciona para a página do tópico
     entry.delete()
     return HttpResponseRedirect(reverse('topic', args=[entry.topic.id]))
+
+
+
+
+
+@login_required
+def delete_topic(request, topic_id):
+    topic = get_object_or_404(Topic, id=topic_id)
+
+    # Verifica se o usuário logado é o dono do tópico
+    if topic.owner != request.user:
+        return render(request, 'learning_logs/permission_denied.html')
+
+    # Exclui o tópico
+    topic.delete()
+
+    # Redireciona para a página de tópicos após a exclusão
+    return redirect('topics')
+
+
 
 
 

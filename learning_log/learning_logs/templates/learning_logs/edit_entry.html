@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 {% extends "learning_logs/base.html" %}
+{% load bootstrap5 %}
 
-{% block content %}
 
-<p>
-    <a href="{% url 'topic' topic_id=topic.id %}"></a>
-</p>
+{% block header %}
+    <h2>{{ topic }}</h2>
+{% endblock header %}
 
-<p>Editar Anotação:</p>
+    {% block content %}
+        <p><a href="{% url 'topic' topic_id=topic.id %}">voltar</a></p>
 
-<form action="{% url 'edit_entry' entry_id=entry.id %}" method="post">
-
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button name="subimit">Salvar Edição</button>
-</form>
+        <h4>Adicionar uma nova Anotação:</h4>
+    <form action="{% url 'edit_entry' entry_id=entry.id %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button class="btn btn-primary mx-2" name="submit">Salvar alteração</button>
+        {% endbuttons %}
+    </form> 
 
 <!-- Adicione um botão para excluir a entrada -->
 <form action="{% url 'delete_entry' entry_id=entry.id %}" method="post">
     {% csrf_token %}
-    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta entrada?')">Excluir Anotação</button>
+    <button class="btn btn-danger mx-2" type="submit" onclick="return confirm('Tem certeza que deseja excluir esta entrada?')">Exluir Anotação</button>
 </form>
 
 {% endblock content %}

@@ -1,12 +1,13 @@
 
+<!DOCTYPE html>
 {% extends "learning_logs/base.html" %}
 {% load bootstrap5 %}
+
 {% block content %}
 
-{% block headear %}
-<h2>Adicione um novo tópico:</h2>
-    
-{% endblock headear %}
+    {% block headear %}
+        <h2>Adicione um novo tópico:</h2>
+    {% endblock headear %}
 
 
 
@@ -14,7 +15,7 @@
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-        <button class=" btn-primary" type="submit" name="submit">Adicionar</button>
+        <button class=" btn btn-primary" type="submit" name="submit">Adicionar</button>
         {% endbuttons %}
     </form>
 {% endblock content %}

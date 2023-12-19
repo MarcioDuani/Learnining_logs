@@ -1,20 +1,19 @@
+<!DOCTYPE html>
 
 {% extends "learning_logs/base.html" %}
+{% load bootstrap5 %}
+
 
 {% block header%}
-    
-    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
         <h1>Acompanhe seu aprendizado.</h1>
-    </div>
-
-    {% endblock header%}
+{% endblock header%}
 
     {% block content %}
         
-    <div class="h-50 p-3 bg-body-tertiary">   
+    <div class="">   
         <h2><a href="{% url 'register' %}">Crie uma conta</a> para utilizar o learning_log e liste os tópicos que vc está aprendendo. </h2>    
     </div>
-        <div class="h-50 p-3 bg-body-tertiary">   
+        <div class="">   
             <h2>   
                 Sempre que você aprender algo novo sobre um tópico, faça uma entrada resumindo o que vc aprendeu.
             </h2>

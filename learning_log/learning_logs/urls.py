@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import delete_topic
 
 
 urlpatterns = [
@@ -10,5 +11,6 @@ urlpatterns = [
     path('new_entry/<topic_id>/',views.new_entry, name='new_entry'),
     path('edit_entry/<entry_id>/',views.edit_entry, name='edit_entry'),
     path('delete_entry/<int:entry_id>/', views.delete_entry, name='delete_entry'),
+    path('delete_topic/<int:topic_id>/', delete_topic, name='delete_topic'),
     
 ]

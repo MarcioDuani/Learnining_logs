@@ -1,30 +1,37 @@
 <!DOCTYPE html>
-    {% extends "learning_logs/base.html" %}
-    {% load bootstrap5 %}
+{% extends "learning_logs/base.html" %}
+{% load bootstrap5 %}
 
-    {%  block header %}
-        <h1>Tópicos</h1>
-    {%  endblock header %}
+{%  block header %}
+    <h1>Tópicos</h1>
+{%  endblock header %}
 
-    {% block content %}
-            <div class="container content-center">
-                <div >
-                        <ul class="list-group">
-                                {% for topic in topics %}
-                                    <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                        <h5>
-                                        <a href="{% url 'topic' topic.id %}">{{ topic }}</a>
-                                        </h5>
-                                        <span class="badge bg-primary rounded-pill">{{ topic.entry_set.count }}</span>
-                                    </li>
-                                    
-                                {% empty %}
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">Não há tópicos adicionados</li>
-                                {% endfor %}
-                        </ul>
-                </div>   
-            </div>  
-            <div div class="container content-center">      
-            <a href="{% url 'new_topic' %}"><button class="btn btn-primary mx-2" name="submit" >Adicionar novos tópicos</button></a>
-            </div> 
-    {% endblock content %}
+{% block content %}
+    <div>
+        <div>
+            <ul>
+                {% for topic in topics %}
+                    <li class="">
+                        <div>
+                            <a href="{% url 'topic' topic.id %}">{{ topic }}</a>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">{{ topic.entry_set.count }}</span>
+
+                        <!-- Adicione um link para a página de exclusão do tópico -->
+                        <a href="{% url 'delete_topic' topic_id=topic.id %}" 
+                        ><button 
+                         type="submit"
+                         class="" 
+                         onclick="return confirm('Tem certeza que deseja excluir este tópico?')">Excluir Tópico</button></a>   
+                    </li>
+                {% empty %}
+                    <li>Não há tópicos adicionados</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>  
+    <div>      
+        <a href="{% url 'new_topic' %}"><button class="" name="submit" >Adicionar novos tópicos</button></a>
+    </div> 
+{% endblock content %}
+

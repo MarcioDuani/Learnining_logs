@@ -3,9 +3,7 @@
 {% load bootstrap5 %}
 
 {% block header %}
-<div class="h-50 p-4 bg-body-tertiary d-flex justify-content-center ">
     <h2>Entre com sua conta de Login.</h2>
-</div>
 {% endblock header %}
 
     
@@ -13,7 +11,7 @@
 {% block content %}
 
 {% if form.erro %}
-    <div class="h-50 p-3 bg-body-tertiary d-flex justify-content-center ">
+    <div class="">
         <p>Login e senha inválido tente novamente</p>
     </div>
 {% endif %}
