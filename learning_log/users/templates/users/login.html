@@ -20,7 +20,7 @@
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-        <button class="btn btn-primary" name="submit">Entrar</button>
+        <button class="btn btn-primary btn-sm" name="submit">Entrar</button>
         {% endbuttons %}
         <input type="hidden" name="next" value="{% url 'index' %}"/>
     </form>

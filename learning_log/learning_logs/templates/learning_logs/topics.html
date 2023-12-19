@@ -7,31 +7,36 @@
 {%  endblock header %}
 
 {% block content %}
-    <div>
-        <div>
-            <ul>
+    <div class="" >
+        <div class="card" >
+            <div class="card-body">
                 {% for topic in topics %}
-                    <li class="">
+                    <div>
                         <div>
-                            <a href="{% url 'topic' topic.id %}">{{ topic }}</a>
+                            <a class="card-header" href="{% url 'topic' topic.id %}">{{ topic }}</a>
                         </div>
                         <span class="badge bg-primary rounded-pill">{{ topic.entry_set.count }}</span>
 
-                        <!-- Adicione um link para a página de exclusão do tópico -->
+    
+                        {% buttons %}
                         <a href="{% url 'delete_topic' topic_id=topic.id %}" 
                         ><button 
                          type="submit"
-                         class="" 
-                         onclick="return confirm('Tem certeza que deseja excluir este tópico?')">Excluir Tópico</button></a>   
-                    </li>
-                {% empty %}
-                    <li>Não há tópicos adicionados</li>
-                {% endfor %}
-            </ul>
+                         class="btn btn-danger btn-sm" 
+                         onclick="return confirm('Tem certeza que deseja excluir este tópico?')"
+                         >Excluir Tópico</button></a>  
+                         {% endbuttons %} 
+                    </div>
+                    {% empty %}
+                    <div>Não há tópicos adicionados</div>
+                    {% endfor %}
+            </div>
         </div>
     </div>  
-    <div>      
-        <a href="{% url 'new_topic' %}"><button class="" name="submit" >Adicionar novos tópicos</button></a>
-    </div> 
+        <div class="card-body">     
+            {% buttons %} 
+            <a href="{% url 'new_topic' %}"><button class="btn btn-primary btn-sm" name="submit" >Adicionar novos tópicos</button></a>
+            {% endbuttons %}
+        </div> 
 {% endblock content %}
 

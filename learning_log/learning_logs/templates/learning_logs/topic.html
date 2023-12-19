@@ -11,12 +11,12 @@
     {% for entry in entries %}
     <div class="panel-primary">
         <div class="panel-primary">     
-                <h4>
+                <div>
                     {{ entry.date_added | date:'M d,Y H:i' }}
-                    <small>
+                    <div>
                         <a href="{% url 'edit_entry' entry.id %}">Editar anotação</a>
-                    </small>
-                </h4>
+                    </div>
+                </div>
                 <div class="panel-body">
                 {{ entry.text | linebreaks }}
                 </div>
@@ -30,6 +30,6 @@
     {% endfor %}
 
     
-    <h4><a href="{% url 'new_entry' topic_id=topic.id %}">Adicione uma nova anotação</a></h4>
+    <div><a href="{% url 'new_entry' topic_id=topic.id %}">Adicione uma nova anotação</a></div>
     
 {% endblock content %}
