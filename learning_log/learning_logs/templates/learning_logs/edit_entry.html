@@ -8,21 +8,22 @@
 {% endblock header %}
 
     {% block content %}
-        <p><a href="{% url 'topic' topic_id=topic.id %}">voltar</a></p>
+        <p><a href="{% url 'topic' topic_id=topic.id %}"><button class="btn btn-outline-primary btn-sm" name="submit" >Voltar</button></a></p>
 
-        <h4>Adicionar uma nova Anotação:</h4>
+        <div class="container mb-3"><h4>Anotação:</h4></div>
+        
     <form action="{% url 'edit_entry' entry_id=entry.id %}" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-        <button class="btn btn-primary mx-2" name="submit">Salvar alteração</button>
+        <button class="btn btn-outline-primary mx-2" name="submit">Salvar alteração</button>
         {% endbuttons %}
     </form> 
 
 <!-- Adicione um botão para excluir a entrada -->
 <form action="{% url 'delete_entry' entry_id=entry.id %}" method="post">
     {% csrf_token %}
-    <button class="btn btn-danger mx-2" type="submit" onclick="return confirm('Tem certeza que deseja excluir esta entrada?')">Exluir Anotação</button>
+    <button class="btn btn-outline-danger mx-2" type="submit" onclick="return confirm('Tem certeza que deseja excluir esta entrada?')">Exluir Anotação</button>
 </form>
 
 {% endblock content %}

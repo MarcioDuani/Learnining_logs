@@ -5,17 +5,18 @@
 
 {% block content %}
 
-    {% block headear %}
-        <h2>Adicione um novo tópico:</h2>
-    {% endblock headear %}
+<p><a href="{% url 'topics' %}"><button class="btn btn-outline-primary btn-sm" name="submit" >Voltar</button></a></p>
 
+    {% block headear %}
+    <div class="container mb-3"><h4>Adicione o título:</h4></div>
+    {% endblock headear %}
 
 
     <form class="form" action="{% url 'new_topic' %}" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-        <button class=" btn btn-primary btn-sm " type="submit" name="submit">Adicionar</button>
+        <button class=" btn btn-outline-primary btn-sm" type="submit" name="submit">Salvar</button>
         {% endbuttons %}
     </form>
 {% endblock content %}

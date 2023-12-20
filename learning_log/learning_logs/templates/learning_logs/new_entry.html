@@ -8,14 +8,15 @@
 {% endblock header %}
 
     {% block content %}
-        <p><a href="{% url 'topic' topic_id=topic.id %}">voltar</a></p>
+        <p><a href="{% url 'topic' topic_id=topic.id %}"><button class="btn btn-outline-primary mx-2" name="submit">Voltar</button></a></p>
 
-        <h4>Adicionar uma nova Anotação:</h4>
+        <div class="container mb-3"><h4>Nova Anotação:</h4></div>
+        
     <form action="{% url 'new_entry' topic_id=topic.id %}" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
-        <button class="btn btn-primary" name="submit">Adicionar</button>
+        <button class="btn btn-outline-primary mx-2" name="submit">Salvar Anotação</button>
         {% endbuttons %}
     </form>
     {% endblock content %}      

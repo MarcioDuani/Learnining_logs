@@ -11,7 +11,21 @@
               {% bootstrap_css %}
               {% bootstrap_javascript %}
       <body>
-                <nav class="navbar navbar-expand-lg bg-light navbar-light mb-3">
+        <style>
+          
+          a:link {
+          text-decoration:none;
+          }
+        
+      
+
+
+          .menu{
+            width: 1300px;
+            height: 300px;
+          overflow-y: scroll;}
+          </style>
+                <nav class="navbar navbar-expand-lg bg-light navbar-light mb-3 ">
               
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,13 +34,7 @@
                   <div class="container d-flex justify-content-center">
                     <div class="row">
                       <div class="col-12 d-flex justify-content-center mb-3">
-                          <a class="navbar-brand" href="{% url 'index'%}"><img
-                          id="MDB-logo"
-                          src="https://mdbcdn.b-cdn.net/wp-content/uploads/2018/06/logo-mdb-jquery-small.png"
-                          alt="MDB Logo"
-                          draggable="false"
-                          height="30"
-                        /></a>
+                          <a class="navbar-brand" href="{% url 'index'%}">Learnining_logs</a>
                       </div>
                       <div class="col-12 d-flex justify-content-center">
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
