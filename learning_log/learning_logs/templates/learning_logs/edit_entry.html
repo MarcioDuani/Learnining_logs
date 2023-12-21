@@ -10,7 +10,7 @@
     {% block content %}
         <p><a href="{% url 'topic' topic_id=topic.id %}"><button class="btn btn-outline-primary btn-sm" name="submit" >Voltar</button></a></p>
 
-        <div class="container mb-3"><h4>Anotação:</h4></div>
+        <div class="container mb-3"><h4>Editar anotação:</h4></div>
         
     <form action="{% url 'edit_entry' entry_id=entry.id %}" method="post">
         {% csrf_token %}

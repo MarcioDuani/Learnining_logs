@@ -17,7 +17,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form action="{% url 'register' %}" method="post">
+                <form action="{% url 'register' %}" method="post" class="ul-none">
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     {% buttons %}
