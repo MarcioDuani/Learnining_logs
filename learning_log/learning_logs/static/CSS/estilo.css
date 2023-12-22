@@ -1,0 +1,12 @@
+small{
+    display: none;
+   }
+
+    a:link {
+    text-decoration:none;
+    }
+  
+    .menu{
+      width: 1300px;
+      height: 300px;
+    overflow-y: scroll;}
