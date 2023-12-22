@@ -6,7 +6,7 @@ small{
     text-decoration:none;
     }
   
-    .menu{
+    .container-fluid{
       width: 1300px;
       height: 300px;
     overflow-y: scroll;}
