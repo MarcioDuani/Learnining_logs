@@ -6,21 +6,14 @@
 {%  endblock header %}
 
 {% block content %}
+
 <p><a href="{% url 'topics'  %}"><button class="btn btn-outline-primary btn-sm" name="submit" >Voltar</button></a></p>
 
-    <div class="container-fluid">
-        <div>
+<div class="container-fluid">
+    <!--div class="card"-->
             <table class="table table-striped table-hover table-border">
-        
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Anotação</th>
-                        <th style="width: 90px;">Ação</th>
-                    </tr>
-                </thead>
-            
                 
+                <div>
                     {% for entry in entries %}
                     <body>
                     <tr>
@@ -33,10 +26,11 @@
 
                         <td>Você ainda não tem anotações !!</td>
             
-                    {% endfor %}                   
+                    {% endfor %} 
+                </div>                  
         </table>
     </div>
-</div>
+<!--/div-->
      
     <div><a href="{% url 'new_entry' topic_id=topic.id %}"><button class="btn btn-outline-primary btn-sm" name="submit" >Adicionar Anotação</button></a></div>
     

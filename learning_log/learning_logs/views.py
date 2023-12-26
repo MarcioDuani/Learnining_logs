@@ -16,7 +16,7 @@ def index(request):
 def topics(request):
     """Mostra todos os assuntos buscando do banco"""
     # Incluindo filtro por dono
-    user_topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+    user_topics = Topic.objects.filter(owner=request.user).order_by('-date_added')
 
     # Contar o número de assuntos
     topic_count = user_topics.count()
@@ -33,7 +33,7 @@ def topic(request, topic_id):
     if topic.owner != request.user:
         raise Http404
 
-    entries = topic.entry_set.order_by('-date_added')
+    entries = topic.entry_set.order_by('date_added')
     context ={'topic': topic, 'entries': entries}
     return render(request,'learning_logs/topic.html', context)
     

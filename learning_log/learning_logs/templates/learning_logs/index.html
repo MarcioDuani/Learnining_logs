@@ -9,7 +9,7 @@
     <div class="box">
         <div class="panel panel-default">
            <div class="panel-heading">
-            <h1>Acompanhe seu aprendizado...</h1>
+            <h1>Acompanhe os melhores atletas amadores de tênis de mesa do RJ.</h1>
            </div>
         </div>
     </div>
@@ -22,21 +22,21 @@
     {% if user.is_authenticated %}
         
         <div class="panel-footer">   
-            <h2>   
-                Sempre que você aprender algo novo sobre um tópico, faça uma anotação resumindo o que aprendeu.
-            </h2>
+            <h5>   
+                O tênis de mesa é um esporte inventado no Reino Unido, mais precisamente na Inglaterra no século XIX onde era conhecido como ping-pong, até se tornar uma marca registrada e por isso mudou-se o nome na Europa para tênis de mesa, sendo o nome ping-pong atualmente usado apenas para fins recreativos. É um dos esportes mais populares do mundo em termos de número de jogadores. O tênis de mesa é conhecido como sendo o esporte com o tipo de bola mais rápida do mundo, sendo o esporte de raquete que mais produz efeito (rotação) na bola.
+            </h5>
         </div>
 
     {% else %}
 
         <div class="panel-body"> 
-            <h2><a href="{% url 'register' %}">Criar sua conta</a> para começar a adicionar tópicos de estudo !!</h2>    
+            <h3><a href="{% url 'register' %}">Criar sua conta</a> e comece a fazer parte do nosso Ranking.</h3>    
         </div>
         
     <div class="panel-footer">     
-        <h2>   
-            Sempre que você aprender algo novo sobre um tópico, faça uma anotação resumindo o que aprendeu.
-        </h2>
+        <h5>   
+            O tênis de mesa é um esporte inventado no Reino Unido, mais precisamente na Inglaterra no século XIX onde era conhecido como ping-pong, até se tornar uma marca registrada e por isso mudou-se o nome na Europa para tênis de mesa, sendo o nome ping-pong atualmente usado apenas para fins recreativos. É um dos esportes mais populares do mundo em termos de número de jogadores. O tênis de mesa é conhecido como sendo o esporte com o tipo de bola mais rápida do mundo, sendo o esporte de raquete que mais produz efeito (rotação) na bola
+        </h5>
     </div>
 
     
