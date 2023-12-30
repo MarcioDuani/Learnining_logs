@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+  <h2>Detalhes do Torneio: {{ torneio.nome }}</h2>
+  <!-- Exibição de informações do torneio e inscrições -->
+
+  <h3>Lista de Inscrições</h3>
+  <ul>
+    {% for inscricao in inscricoes %}
+      <li>
+        {{ inscricao.jogador.username }}
+        - <a href="{% url 'eventos:adicionar_resultado' torneio_id=torneio.id inscricao_id=inscricao.id %}">Adicionar Resultado</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+  <h2>Adicionar Resultado</h2>
+  <form method="post" action="{% url 'eventos:adicionar_resultado' torneio_id=torneio.id inscricao_id=inscricao.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Adicionar Resultado">
+  </form>
+{% endblock %}
+
+<a >Adicionar Resultado</a>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'learning_logs',
     'users',
     'bootstrap5',
+    'eventos',
 ]
 
 MIDDLEWARE = [
